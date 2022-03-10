@@ -5,21 +5,18 @@ const { response } = require('express');
 const app = express();
 const server = http.createServer(app);
 
-app.get('/', (request, response) => {
-    response.send(`
-        <h1>Home Page</h1>
-    `);
-});
-app.get('/products', (request, response) => {
-    response.send(`
-        <h1>Product Page</h1>
-    `)
-});
-app.get('/news', (request, response) => {
-    response.send(`
-        <h1>News Page</h1>
-    `)
-});
+const homeRoute = require('./router/home');
+app.use(homeRoute);
+
+const productsRoute = require ('./router/product');
+app.use(productsRoute);
+
+const newsRoute = require('./router/news');
+app.use(newsRoute);
+
+const detailProductRoute = require('./router/detailProduct');
+app.use(detailProductRoute);
+
 
 // Bước 2: khởi tạo server
 // const server = http.createServer((request, response) =>{
