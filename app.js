@@ -5,12 +5,14 @@ import homeRoute from './router/home';
 import productRoute from './router/product';
 import newsRoute from './router/news';
 import mongoose from "mongoose";
+import categoryRoute from './router/category';
 
 const app = express();
 
 app.use(express.json());
 app.use(homeRoute);
 app.use("/api",productRoute);
+app.use("/api",categoryRoute);
 app.use(newsRoute);
 
 mongoose.connect('mongodb://localhost:27017/we16307');
