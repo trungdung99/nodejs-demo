@@ -1,6 +1,7 @@
 import { response } from "express"
 import { request } from "express"
 import Category from "../models/category"
+import Products from "../models/products"
 
 export const listCategory = async (request, response) => {
     try {
@@ -13,7 +14,8 @@ export const listCategory = async (request, response) => {
 export const listCategoryDetail = async (request, response) => {
     try {
         const category = await Category.findOne({_id:request.params.id}).exec()
-        response.json(category)
+        const product = await Products.find({category}).populate("category").exec()
+        response.json({category, product})
     } catch (error) {
         response.status(400).json({message: "Khong the tim thay danh muc"})
     }
